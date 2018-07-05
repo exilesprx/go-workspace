@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  app:
+    image: tianon/true
+    volumes:
+      - ${APPLICATION}:/go/src
+
+  workspace:
+    build:
+      context: ./golang
+      args:
+        - APP_DIR=${APP_DIR}
+    ports:
+      - 1323:1323
+    volumes_from:
+      - app
+    tty: true
